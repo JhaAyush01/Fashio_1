@@ -64,10 +64,6 @@ async def startup_event():
     _index = create_faiss_index(_model, _sentences)
 
 @app.get("/")
-async def root():
-    return {"message": "FASHIO API is running"}
-
-@app.get("/api/search")
 async def search_get(
     query: str = Query(..., description="Search query"),
     k: int = Query(5, ge=1, le=20, description="Number of results")
@@ -75,7 +71,7 @@ async def search_get(
     """Search endpoint - GET method"""
     return perform_search(query, k)
 
-@app.post("/api/search")
+@app.post("/")
 async def search_post(request: SearchRequest):
     """Search endpoint - POST method"""
     return perform_search(request.query, request.k)
