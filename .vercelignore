@@ -27,6 +27,7 @@ product_embeddings.index
 model/
 clothing_similarity_search.csv
 finetuning_data.csv
+# NOTE: Preprocessed data.csv is REQUIRED - DO NOT exclude it
 
 # Jupyter notebooks (development only)
 *.ipynb
