@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASHIO🎩 - Where style meets passion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #262730;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d3d3d3;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background-color: #ffffff;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #262730;
+            box-shadow: 0 0 0 1px #262730;
+        }
+        
+        .slider-container {
+            margin-bottom: 30px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #262730;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #262730;
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .k-value {
+            font-weight: 600;
+            color: #262730;
+            font-size: 0.95em;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px 24px;
+            background: #262730;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        
+        button:hover {
+            background: #3a3a45;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            background: #262730;
+        }
+        
+        .spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #667eea;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        .spinner.active {
+            display: block;
+        }
+        
+        .spinner::before {
+            content: '🔄';
+            display: inline-block;
+            margin-right: 8px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .results {
+            margin-top: 30px;
+        }
+        
+        .results h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .result-item {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: box-shadow 0.2s;
+        }
+        
+        .result-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .result-item h3 {
+            color: #262730;
+            margin-bottom: 12px;
+            font-size: 1.25em;
+            font-weight: 600;
+        }
+        
+        .result-item .description {
+            color: #71717a;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        
+        .result-item .link {
+            color: #1f77b4;
+            text-decoration: none;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        
+        .result-item .link:hover {
+            text-decoration: underline;
+        }
+        
+        .likeness {
+            display: inline-block;
+            color: #262730;
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-top: 8px;
+        }
+        
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #c33;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FASHIO🎩</h1>
+        <h3 class="subtitle">🌟🌟Where style meets passion...</h3>
+        
+        <div class="search-container">
+            <label for="query">Tell us how can we fashionize you 💫</label>
+            <input type="text" id="query" placeholder="e.g., Men's winter jacket black and white" autocomplete="off">
+        </div>
+        
+        <div class="slider-container">
+            <div class="slider-label">
+                <label for="k">Number of picks? 👒</label>
+                <span class="k-value" id="kValue">5</span>
+            </div>
+            <input type="range" id="k" min="1" max="20" value="5">
+        </div>
+        
+        <button id="searchBtn" onclick="performSearch()">Click to Discover✨</button>
+        
+        <div class="spinner" id="spinner">Tailoring your preferences💫</div>
+        
+        <div class="error hidden" id="error"></div>
+        
+        <div class="results hidden" id="results">
+            <h2 id="resultsTitle"></h2>
+            <div id="resultsList"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Update k value display when slider changes
+        document.getElementById('k').addEventListener('input', function(e) {
+            document.getElementById('kValue').textContent = e.target.value;
+        });
+        
+        // Allow Enter key to trigger search
+        document.getElementById('query').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        async function performSearch() {
+            const query = document.getElementById('query').value.trim();
+            const k = parseInt(document.getElementById('k').value);
+            const searchBtn = document.getElementById('searchBtn');
+            const spinner = document.getElementById('spinner');
+            const error = document.getElementById('error');
+            const results = document.getElementById('results');
+            
+            if (!query) {
+                error.textContent = 'Please enter a search query';
+                error.classList.remove('hidden');
+                results.classList.add('hidden');
+                return;
+            }
+            
+            // Hide previous results and errors
+            error.classList.add('hidden');
+            results.classList.add('hidden');
+            
+            // Show spinner and disable button
+            spinner.classList.add('active');
+            searchBtn.disabled = true;
+            
+            try {
+                // Call the API endpoint
+                const response = await fetch(`/api/search?query=${encodeURIComponent(query)}&k=${k}`);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.detail || data.error || 'An error occurred');
+                }
+                
+                // Display results
+                displayResults(data);
+            } catch (err) {
+                error.textContent = 'Error: ' + err.message;
+                error.classList.remove('hidden');
+            } finally {
+                spinner.classList.remove('active');
+                searchBtn.disabled = false;
+            }
+        }
+        
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const resultsTitle = document.getElementById('resultsTitle');
+            const resultsList = document.getElementById('resultsList');
+            
+            resultsTitle.textContent = `Find your look with : '${data.query}'`;
+            
+            let html = '';
+            data.results.forEach(result => {
+                html += `
+                    <div class="result-item">
+                        <h3>${result.name}</h3>
+                        ${result.description ? `<p class="description">${result.description}</p>` : ''}
+                        <a href="${result.url}" target="_blank" class="link">Go to: ${result.url}</a>
+                        <div>
+                            <span class="likeness">Likeness: ${result.likeness.toFixed(2)}%</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsList.innerHTML = html;
+            resultsDiv.classList.remove('hidden');
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

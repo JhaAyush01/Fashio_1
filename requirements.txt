@@ -1,7 +1,10 @@
 faiss-cpu>=1.7.0
 sentence-transformers>=2.0.0
-groq
 torch
 transformers
 huggingface_hub
-streamlit
+numpy>=1.21.0
+pandas>=1.3.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart
