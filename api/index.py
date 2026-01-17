@@ -54,14 +54,20 @@ class SearchRequest(BaseModel):
     query: str
     k: Optional[int] = 5
 
-# Initialize on startup
-@app.on_event("startup")
-async def startup_event():
+# Lazy initialization function - called on first request
+def ensure_initialized():
+    """Ensure model and data are loaded (lazy loading)"""
     global _df, _model, _index, _sentences
-    _df = load_data()
-    _sentences = _df['description'].tolist()
-    _model = load_model()
-    _index = create_faiss_index(_model, _sentences)
+    if _df is None:
+        _df = load_data()
+        _sentences = _df['description'].tolist()
+        _model = load_model()
+        _index = create_faiss_index(_model, _sentences)
+
+@app.get("/")
+async def root():
+    """Health check endpoint"""
+    return {"status": "ok", "message": "FASHIO API is running"}
 
 @app.get("/search")
 async def search_get(
@@ -79,6 +85,9 @@ async def search_post(request: SearchRequest):
 def perform_search(query: str, k: int):
     """Perform the actual search - same logic as original Streamlit app"""
     global _df, _model, _index
+    
+    # Lazy initialization on first request
+    ensure_initialized()
     
     if not query:
         raise HTTPException(status_code=400, detail="Query parameter is required")
