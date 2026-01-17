@@ -21,3 +21,33 @@ venv/
 env/
 ENV/
 *.log
+
+# Large files NOT needed for deployment:
+product_embeddings.index
+model/
+clothing_similarity_search.csv
+finetuning_data.csv
+
+# Jupyter notebooks (development only)
+*.ipynb
+.ipynb_checkpoints/
+
+# Old/unused Python files
+login.py
+Imports.py
+Designing UI.py
+python main.py
+main.py
+Self Designed fine-tuning data.py
+
+# Visuals for README (not needed in deployment)
+Visuals/
+
+# Deployment scripts (not needed on Vercel)
+create_repo.ps1
+push_to_new_repo.ps1
+DEPLOY_COMMANDS.md
+Dockerfile
+
+# Only keep Preprocessed data.csv (required by api/search.py)
+# All other CSV files excluded above
